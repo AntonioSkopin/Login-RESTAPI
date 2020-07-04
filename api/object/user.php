@@ -29,4 +29,31 @@
 
             return $stmt;
         }
+
+        // Function to sign the user up
+        public function signup() {
+            // Query to insert the record
+            $query = "INSERT INTO " .$this->table_name. " 
+            SET username=:username, email=:email, password=:password";
+
+            // Prepare the query
+            $stmt = $this->conn->prepare($query);
+
+            // Sanitize
+            $this->username = htmlspecialchars(strip_tags($this->username));
+            $this->email = htmlspecialchars(strip_tags($this->email));
+            $this->password = htmlspecialchars(strip_tags($this->password));
+
+            // Bind values
+            $stmt->bindParam("username", $this->name);
+            $stmt->bindParam("email", $this->email);
+            $stmt->bindParam("password", $this->password);
+
+            // Execute query
+            if ($stmt->execute()) {
+                return true;
+            }
+
+            return false;
+        }
     }
