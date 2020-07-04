@@ -45,7 +45,7 @@
         http_response_code(200);
 
         // Show users in JSON format
-        echo json_encode($users_user);
+        echo json_encode($users_arr);
     } else {
         // Set response code to 404 (Not found)
         http_response_code(404);

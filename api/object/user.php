@@ -12,14 +12,14 @@
         public $password;
 
         // Constructor with $db as database connection
-        public function __constructor($db) {
+        public function __construct($db) {
             $this->conn = $db;
         }
 
         // Function to read the users
         function read() {
             // select all query
-            $query = "SELECT * FROM user";
+            $query = "SELECT * FROM " . $this->table_name;
 
             // Prepare the query statement
             $stmt = $this->conn->prepare($query);
