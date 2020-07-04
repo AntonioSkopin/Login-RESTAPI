@@ -15,4 +15,18 @@
         public function __constructor($db) {
             $this->conn = $db;
         }
+
+        // Function to read the users
+        function read() {
+            // select all query
+            $query = "SELECT * FROM user";
+
+            // Prepare the query statement
+            $stmt = $this->conn->prepare($query);
+
+            // Execute the query
+            $stmt->execute();
+
+            return $stmt;
+        }
     }
