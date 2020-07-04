@@ -35,7 +35,7 @@
             // Query to insert the record
             $query = "INSERT INTO " .$this->table_name. " 
             SET username=:username, email=:email, password=:password";
-
+            
             // Prepare the query
             $stmt = $this->conn->prepare($query);
 
@@ -45,7 +45,7 @@
             $this->password = htmlspecialchars(strip_tags($this->password));
 
             // Bind values
-            $stmt->bindParam("username", $this->name);
+            $stmt->bindParam("username", $this->username);
             $stmt->bindParam("email", $this->email);
             $stmt->bindParam("password", $this->password);
 

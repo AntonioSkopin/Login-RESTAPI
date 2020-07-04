@@ -33,7 +33,7 @@
         $user->password = $data->password;
         
         // Create the product
-        if ($product->signup()) {
+        if ($user->signup()) {
             // Set response code to 201 (Created)
             http_response_code(201);
 
