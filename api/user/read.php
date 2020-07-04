@@ -46,4 +46,10 @@
 
         // Show users in JSON format
         echo json_encode($users_user);
+    } else {
+        // Set response code to 404 (Not found)
+        http_response_code(404);
+
+        // Tell the user no users were found
+        echo json_encode(array("message" => "No users were found."));
     }
