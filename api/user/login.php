@@ -35,12 +35,17 @@
         // Extract row
         extract($row);
 
+        // Array with output data
         $user_arr = array(
             "status" => "Logged in",
             "message" => "Succesfully logged in!",
             "username" => $username
         );
     } else {
+        // Set response code to 400 (Bad request)
+        http_response_code(400);
+
+        // Array with output data
         $user_arr = array(
             "status" => "Invalid info.",
             "message" => "Please enter correct login data!"
