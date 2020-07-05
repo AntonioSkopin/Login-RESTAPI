@@ -32,6 +32,12 @@
 
         // Function to sign the user up
         public function signup() {
+
+            // Check if username or email already exists
+            if ($this->doesAlreadyExist()) {
+                return false;
+            }
+
             // Query to insert the record
             $query = "INSERT INTO " .$this->table_name. " 
             SET username=:username, email=:email, password=:password";
@@ -55,5 +61,25 @@
             }
 
             return false;
+        }
+
+        // Function to check whether the username or email already exists
+        public function doesAlreadyExist() {
+            // Query to check the database
+            $query = "SELECT username, email FROM " .$this->table_name. " 
+            WHERE username='".$this->username."' OR email='".$this->email."'";
+
+            // Prepare the query
+            $stmt = $this->conn->prepare($query);
+
+            // Execute the query
+            $stmt->execute();
+
+            // Check if there is a row with the same email or username
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
