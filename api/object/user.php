@@ -32,7 +32,6 @@
 
         // Function to sign the user up
         public function signup() {
-
             // Check if username or email already exists
             if ($this->doesAlreadyExist()) {
                 return false;
@@ -81,5 +80,27 @@
             } else {
                 return false;
             }
+        }
+
+        // Function to log an existing user in
+        public function login() {
+            // Query to compare username and password
+            $query = "SELECT username, password FROM " .$this->table_name. " 
+            WHERE username=:username AND password=:password";
+
+            // Prepare the query
+            $stmt = $this->conn->prepare($query);
+
+            // Sanitize
+            $this->username = htmlspecialchars(strip_tags($this->username));
+            $this->password = htmlspecialchars(strip_tags($this->password));
+
+            // Bind values
+            $stmt->bindParam("username", $this->username);
+            $stmt->bindParam("password", $this->password);
+
+            // Execute query and return the statement
+            $stmt->execute();
+            return $stmt;
         }
     }
